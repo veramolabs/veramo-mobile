@@ -272,6 +272,12 @@ PODS:
   - React-jsinspector (0.66.1)
   - React-logger (0.66.1):
     - glog
+  - react-native-get-random-values (1.7.0):
+    - React-Core
+  - react-native-randombytes (3.6.1):
+    - React-Core
+  - react-native-sqlite-storage (6.0.1):
+    - React-Core
   - React-perflogger (0.66.1)
   - React-RCTActionSheet (0.66.1):
     - React-Core/RCTActionSheetHeaders (= 0.66.1)
@@ -382,6 +388,9 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
+  - react-native-randombytes (from `../node_modules/react-native-randombytes`)
+  - react-native-sqlite-storage (from `../node_modules/react-native-sqlite-storage`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -448,6 +457,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-get-random-values:
+    :path: "../node_modules/react-native-get-random-values"
+  react-native-randombytes:
+    :path: "../node_modules/react-native-randombytes"
+  react-native-sqlite-storage:
+    :path: "../node_modules/react-native-sqlite-storage"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -506,6 +521,9 @@ SPEC CHECKSUMS:
   React-jsiexecutor: db2f6e22a534d466fc0e34e622df47d9d20bab2f
   React-jsinspector: 8c0517dee5e8c70cd6c3066f20213ff7ce54f176
   React-logger: bfddd3418dc1d45b77b822958f3e31422e2c179b
+  react-native-get-random-values: 237bffb1c7e05fb142092681531810a29ba53015
+  react-native-randombytes: 5fc412efe7b5c55b9002c0004d75fe5fabcaa507
+  react-native-sqlite-storage: f6d515e1c446d1e6d026aa5352908a25d4de3261
   React-perflogger: fcac6090a80e3d967791b4c7f1b1a017f9d4a398
   React-RCTActionSheet: caf5913d9f9e605f5467206cf9d1caa6d47d7ad6
   React-RCTAnimation: 6539e3bf594f6a529cd861985ba6548286ae1ead
