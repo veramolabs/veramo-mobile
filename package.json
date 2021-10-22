@@ -8,7 +8,9 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "postinstall": "rn-nodeify --install assert,buffer,process,crypto,stream,vm --hack"
+    "postinstall": "rn-nodeify --install assert,buffer,process,crypto,stream,vm --hack",
+    "build-detox-android": "detox build -c android.emu.debug",
+    "test-detox-android": "detox test -c android.emu.debug"
   },
   "dependencies": {
     "@ethersproject/shims": "^5.5.0",
@@ -23,6 +25,7 @@
     "@zxing/text-encoding": "^0.9.0",
     "assert": "^1.5.0",
     "buffer": "^4.9.2",
+    "detox": "^18.23.1",
     "ethr-did-resolver": "^4.3.4",
     "process": "^0.11.10",
     "react": "17.0.2",
@@ -64,6 +67,24 @@
       "json",
       "node"
     ]
+  },
+  "detox": {
+    "configurations": {
+      "android.emu.debug": {
+        "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+        "build":
+        "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
+        "type": "android.emulator",
+        "name": "emu"
+      },
+      "ios.sim.release": {
+        "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/RNDetoxGa.app",
+        "build": "xcodebuild -workspace ios/RNDetoxGa.xcworkspace -scheme RNDetoxGa -configuration Release -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone 8"
+      }
+    },
+    "test-runner": "jest"
   },
   "react-native": {
     "crypto": "react-native-crypto",
