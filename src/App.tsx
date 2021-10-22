@@ -36,7 +36,7 @@ const App = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView testID="scroll">
         <View style={{ padding: 20 }}>
           <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Identifiers</Text>
           <View style={{ marginBottom: 50, marginTop: 20 }}>
