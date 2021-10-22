@@ -18,6 +18,9 @@ jobs:
 
       - name: Node
         uses: actions/setup-node@v1
+          with:
+            node-version: '14'
+            cache: 'yarn'
 
       - name: Use specific Java version for sdkmanager to work
         uses: joschi/setup-jdk@v2
