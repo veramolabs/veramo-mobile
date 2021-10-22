@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView, View, Text, Button} from 'react-native';
 
 // Import agent from setup
-import {agent} from './src/veramo';
+import {agent} from './veramo';
 
 interface Identifier {
   did: string;
