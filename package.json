@@ -68,6 +68,14 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
+  "prettier": {
+    "jsxBracketSameLine": false,
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "printWidth": 80,
+    "singleQuote": true,
+    "semi": false
+  },
   "jest": {
     "preset": "react-native",
     "moduleFileExtensions": [
