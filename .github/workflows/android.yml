@@ -69,7 +69,7 @@ jobs:
           timeout_minutes: 15
           retry_wait_seconds: 60
           max_attempts: 3
-          command: yarn tests:android:build
+          command: yarn build:android:debug
 
       - name: Metro Bundler Cache
         uses: actions/cache@v2
