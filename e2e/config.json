@@ -1,6 +1,13 @@
 {
-    "setupFilesAfterEnv": ["./init.js"],
-    "testEnvironment": "node",
-    "reporters": ["detox/runners/jest/streamlineReporter"],
-    "verbose": true
-  }
+  "setupFilesAfterEnv": ["./setup.ts"],
+  "maxWorkers": 1,
+  "testEnvironment": "./environment",
+  "testRunner": "jest-circus/runner",
+  "testTimeout": 120000,
+  "testRegex": "\\.e2e\\.ts$",
+  "transform": {
+    "\\.tsx?$": "ts-jest"
+  },
+  "reporters": ["detox/runners/jest/streamlineReporter"],
+  "verbose": true
+}
