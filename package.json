@@ -46,6 +46,7 @@
     "@commitlint/cli": "^13.2.1",
     "@commitlint/config-conventional": "^13.2.0",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@testing-library/react-native": "^8.0.0",
     "@types/jest": "^27.0.2",
     "@types/react-native": "^0.65.0",
     "@types/react-test-renderer": "^17.0.1",
@@ -56,7 +57,6 @@
     "lint-staged": "^11.2.3",
     "metro-react-native-babel-preset": "^0.66.2",
     "prettier": "^2.4.1",
-    "react-native-testing-library": "^6.0.0",
     "react-test-renderer": "17.0.2",
     "rn-nodeify": "^10.3.0",
     "ts-jest": "^27.0.7",
@@ -90,8 +90,7 @@
       "**/__tests__/*.+(ts|tsx|js|jsx)"
     ],
     "transform": {
-      "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.(ts|tsx)$": "ts-jest"
+      "^.+\\.(js|ts|tsx)$": "<rootDir>/node_modules/babel-jest"
     },
     "modulePaths": [
       "<rootDir>"
