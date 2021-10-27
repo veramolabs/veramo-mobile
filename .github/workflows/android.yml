@@ -81,7 +81,7 @@ jobs:
       - name: Pre-fetch Javascript bundle
         # Prebuild the bundle so that's fast when the app starts.
         run: |
-          nohup yarn tests:packager:jet-ci &
+          nohup yarn start --no-interactive &
           printf 'Waiting for packager to come online'
           until curl --output /dev/null --silent --head --fail http://localhost:8081/status; do
             printf '.'
