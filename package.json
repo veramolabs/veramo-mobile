@@ -103,7 +103,7 @@
         "binaryPath": "android/app/build/outputs/apk/release/app-debug.apk",
         "build": "pushd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && popd",
         "type": "android.emulator",
-        "name": "emu_api_27"
+        "name": "emu"
       },
       "ios.sim.release": {
         "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/RNDetoxGa.app",
