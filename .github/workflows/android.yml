@@ -32,7 +32,7 @@ jobs:
       - name: Build e2e target
         run: |
           yarn install --frozen-lockfile
-          yarn build:android:release
+          yarn build:android:debug
 
       - name: Android test
         timeout-minutes: 10
@@ -42,7 +42,8 @@ jobs:
           export PATH=$PATH:$ANDROID_HOME/platform-tools
           $ANDROID_HOME/emulator/emulator @emu_api_27 &
           adb wait-for-device; adb shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'; adb shell wm dismiss-keyguard
-          yarn test:android:release
+          yarn test:android:debug
+
       - name: Upload test artifacts (videos)
         uses: actions/upload-artifact@master
         with:

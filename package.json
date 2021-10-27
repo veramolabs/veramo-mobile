@@ -10,8 +10,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "postinstall": "rn-nodeify --install assert,buffer,process,crypto,stream,vm --hack",
     "test-ci": "jest",
-    "build:android:release": "detox build -c android.emu.release",
-    "test:android:release": "detox test -c android.emu.release --cleanup"
+    "build:android:debug": "detox build -c android.emu.debug",
+    "test:android:debug": "detox test -c android.emu.debug --cleanup"
   },
   "dependencies": {
     "@ethersproject/shims": "^5.5.0",
@@ -99,9 +99,9 @@
   "detox": {
     "test-runner": "jest",
     "configurations": {
-      "android.emu.release": {
-        "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
-        "build": "pushd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && popd",
+      "android.emu.debug": {
+        "binaryPath": "android/app/build/outputs/apk/release/app-debug.apk",
+        "build": "pushd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && popd",
         "type": "android.emulator",
         "name": "emu_api_27"
       },
