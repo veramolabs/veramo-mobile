@@ -101,24 +101,35 @@
   "detox": {
     "test-runner": "jest",
     "runnerConfig": "e2e/config.json",
+    "skipLegacyWorkersInjection": true,
+    "devices": {
+      "emulator": {
+        "type": "android.emulator",
+        "device": {
+          "avdName": "ANDROID_API_31"
+        }
+      }
+    },
+    "apps": {
+      "android.debug": {
+        "type": "android.apk",
+        "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+        "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd .."
+      },
+      "android.release": {
+        "type": "android.apk",
+        "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
+        "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd .."
+      }
+    },
     "configurations": {
       "android.emu.debug": {
-        "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
-        "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
-        "type": "android.emulator",
-        "avdName": "TestingAVD"
+        "device": "emulator",
+        "app": "android.debug"
       },
       "android.emu.release": {
-        "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
-        "build": "pushd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && popd",
-        "type": "android.emulator",
-        "name": "emu"
-      },
-      "ios.sim.release": {
-        "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/RNDetoxGa.app",
-        "build": "xcodebuild -workspace ios/RNDetoxGa.xcworkspace -scheme RNDetoxGa -configuration Release -sdk iphonesimulator -derivedDataPath ios/build",
-        "type": "ios.simulator",
-        "name": "iPhone 8"
+        "device": "emulator",
+        "app": "android.release"
       }
     }
   },
