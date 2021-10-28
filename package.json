@@ -106,7 +106,7 @@
       "emulator": {
         "type": "android.emulator",
         "device": {
-          "avdName": "ANDROID_API_31"
+          "avdName": "ANDROID_API_30"
         }
       }
     },
