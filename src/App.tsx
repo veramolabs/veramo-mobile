@@ -18,7 +18,8 @@ interface Identifier {
 
 const App = () => {
   const [identifiers, setIdentifiers] = useState<Identifier[]>([])
-  const [alias, setAlias] = useState<string>('')
+  const [alias, setAlias] = useState<string>('Alice')
+  const [loading, setLoading] = useState<boolean>(false)
 
   // Add the new identifier to state
   const createIdentifier = async () => {
@@ -31,18 +32,20 @@ const App = () => {
     }
   }
 
-  // Check for existing identifers on load and set them to state
-  useEffect(() => {
-    const getIdentifiers = async () => {
-      const _ids = await agent.didManagerFind()
-      setIdentifiers(_ids)
+  const getIdentifiers = React.useCallback(async () => {
+    setLoading(true)
+    const _ids = await agent.didManagerFind()
+    setIdentifiers(_ids)
+    setLoading(false)
 
-      // Inspect the id object in your debug tool
-      // console.log('_ids:', _ids)
-    }
-
-    getIdentifiers()
+    // Inspect the id object in your debug tool
+    // console.log('_ids:', _ids)
   }, [])
+
+  // Check for existing identifers on load and set them to state
+  // useEffect(() => {
+  //   getIdentifiers()
+  // }, [])
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -102,6 +105,11 @@ const App = () => {
               onPress={() => createIdentifier()}
               title={'Create Identifier'}
             />
+            <Button
+              onPress={() => getIdentifiers()}
+              title={'Load Identifiers'}
+            />
+            <Text>{loading ? 'Loading...' : ''}</Text>
           </View>
         </View>
       </ScrollView>

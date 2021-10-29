@@ -1,46 +1,39 @@
 import React from 'react'
-import { render, act } from '@testing-library/react-native'
+import { render, fireEvent, waitFor, act } from '@testing-library/react-native'
 import App from '../App'
+import { agent } from '../veramo'
 
 describe('App', () => {
+  const ALIAS = 'Alice'
+
+  const didManagerFind = jest.spyOn(agent, 'didManagerFind')
+  didManagerFind.mockResolvedValue([])
+
+  const didManagerCreate = jest.spyOn(agent, 'didManagerCreate')
+
+  didManagerCreate.mockResolvedValue({
+    alias: ALIAS,
+    did: 'did:ethr:rinkeby:1234567890',
+    provider: 'ethr-did',
+    keys: [],
+    services: [],
+  })
+
   it('creates an identifier', async () => {
-    const ALIAS = 'Alice'
+    const { getByText, queryByText, getByTestId } = render(<App />)
 
-    // const root = await render(<App />)
-    // const root = await waitFor(() => render(<App />))
-    // const div = await waitFor(() => getByText('Create Identifier'))
+    act(() => {
+      fireEvent.press(getByText('Load Identifiers'))
+    })
 
-    // await act(async () => {
+    await waitFor(() => {
+      expect(queryByText('Loading ...')).not.toBeTruthy()
+    })
 
-    // })
+    act(() => {
+      fireEvent.press(getByText('Create Identifier'))
+    })
 
-    // await waitFor(() => {
-    //   expect(getByTestId('scrollView')).toBeDefined()
-    // })
-
-    // await act(async () => render(<App />))
-
-    // const input = getByTestId('input')
-    // const button = getByText('Create Identifier')
-
-    // act(() => {
-    //   fireEvent.changeText(input, ALIAS)
-    // })
-
-    // await waitFor(() => expect(getByText(ALIAS)).toBeTruthy())
-
-    // act(() => {
-    //   fireEvent.press(button)
-    // })
-
-    // await waitFor(() => {
-    //   const identifier = queryByTestId('item-identifier')
-    //   console.log('ID', identifier)
-    // })
-
-    // await waitFor(() => expect(queryByTestId('item-identifier')).toBeTruthy())
-
-    // expect(getByTestId('item-identifier').props.children).toBe(ALIAS)
-    // await waitFor(() => expect(toJSON()).toMatchSnapshot())
+    expect(queryByText('Alice')).toBeTruthy()
   })
 })
