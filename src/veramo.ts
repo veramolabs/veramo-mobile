@@ -5,26 +5,26 @@ import {
   IResolver,
   IDataStore,
   IKeyManager,
-} from '@veramo/core';
+} from '@veramo/core'
 
 // Core identity manager plugin
-import {DIDManager} from '@veramo/did-manager';
+import { DIDManager } from '@veramo/did-manager'
 
 // Ethr did identity provider
-import {EthrDIDProvider} from '@veramo/did-provider-ethr';
+import { EthrDIDProvider } from '@veramo/did-provider-ethr'
 
 // Core key manager plugin
-import {KeyManager} from '@veramo/key-manager';
+import { KeyManager } from '@veramo/key-manager'
 
 // Custom key management system for RN
-import {KeyManagementSystem, SecretBox} from '@veramo/kms-local';
+import { KeyManagementSystem, SecretBox } from '@veramo/kms-local'
 
 // Custom resolver
 // Custom resolvers
-import {DIDResolverPlugin} from '@veramo/did-resolver';
-import {Resolver} from 'did-resolver';
-import {getResolver as ethrDidResolver} from 'ethr-did-resolver';
-import {getResolver as webDidResolver} from 'web-did-resolver';
+import { DIDResolverPlugin } from '@veramo/did-resolver'
+import { Resolver } from 'did-resolver'
+import { getResolver as ethrDidResolver } from 'ethr-did-resolver'
+import { getResolver as webDidResolver } from 'web-did-resolver'
 
 // Storage plugin using TypeOrm
 import {
@@ -33,23 +33,26 @@ import {
   DIDStore,
   IDataStoreORM,
   PrivateKeyStore,
-} from '@veramo/data-store';
+} from '@veramo/data-store'
 
 // TypeORM is installed with '@veramo/data-store'
-import {createConnection} from 'typeorm';
+import { createConnection } from 'typeorm'
+
+// Run local tests using sqlite db
+import { PLATFORM } from './env'
 
 // You will need to get a project ID from infura https://www.infura.io
-const INFURA_PROJECT_ID = '5ffc47f65c4042ce847ef66a3fa70d4c';
+const INFURA_PROJECT_ID = '5ffc47f65c4042ce847ef66a3fa70d4c'
 
 // Create react native db connection
 const dbConnection = createConnection({
-  type: 'react-native',
+  type: PLATFORM,
   database: 'veramo.sqlite',
   location: 'default',
   synchronize: true,
   logging: ['error', 'info', 'warn'],
   entities: Entities,
-});
+})
 
 export const agent = createAgent<
   IDIDManager & IKeyManager & IDataStore & IDataStoreORM & IResolver
@@ -83,9 +86,9 @@ export const agent = createAgent<
     }),
     new DIDResolverPlugin({
       resolver: new Resolver({
-        ...ethrDidResolver({infuraProjectId: INFURA_PROJECT_ID}),
+        ...ethrDidResolver({ infuraProjectId: INFURA_PROJECT_ID }),
         ...webDidResolver(),
       }),
     }),
   ],
-});
+})

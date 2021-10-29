@@ -1,21 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, ScrollView, View, Text, Button } from 'react-native'
+import {
+  SafeAreaView,
+  ScrollView,
+  View,
+  Text,
+  Button,
+  TextInput,
+} from 'react-native'
 
 // Import agent from setup
 import { agent } from './veramo'
 
 interface Identifier {
   did: string
+  alias?: string
 }
 
 const App = () => {
   const [identifiers, setIdentifiers] = useState<Identifier[]>([])
+  const [alias, setAlias] = useState<string>('')
 
   // Add the new identifier to state
   const createIdentifier = async () => {
     try {
-      const _id = await agent.didManagerCreate()
+      const _id = await agent.didManagerCreate({ alias })
       setIdentifiers((s) => s.concat([_id]))
+      setAlias('')
     } catch (error) {
       console.log(error)
     }
@@ -35,14 +45,34 @@ const App = () => {
   }, [])
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
-        <View style={{ padding: 20 }}>
-          <Text style={{ fontSize: 30, fontWeight: 'bold' }}>Identifiers</Text>
-          <View style={{ marginBottom: 50, marginTop: 20 }}>
+        <View>
+          <Text style={{ fontSize: 30, fontWeight: 'bold', padding: 20 }}>
+            Identifiers
+          </Text>
+          <View
+            style={{
+              marginBottom: 50,
+              marginTop: 20,
+              margin: 15,
+              borderRadius: 20,
+              backgroundColor: '#EFEFEF',
+            }}
+          >
             {identifiers && identifiers.length > 0 ? (
-              identifiers.map((id: Identifier) => (
-                <View key={id.did}>
+              identifiers.map((id: Identifier, index: number) => (
+                <View
+                  key={id.did}
+                  style={{
+                    padding: 15,
+                    borderBottomColor: '#DDDDDD',
+                    borderBottomWidth: identifiers.length > index + 1 ? 1 : 0,
+                  }}
+                >
+                  <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+                    {id.alias}
+                  </Text>
                   <Text>{id.did}</Text>
                 </View>
               ))
@@ -50,10 +80,24 @@ const App = () => {
               <Text>No identifiers created yet</Text>
             )}
           </View>
-          <Button
-            onPress={() => createIdentifier()}
-            title={'Create Identifier'}
-          />
+          <View style={{ padding: 15 }}>
+            <TextInput
+              placeholder="Add alias name (required)"
+              style={{
+                marginBottom: 20,
+                backgroundColor: '#EFEFEF',
+                padding: 15,
+                borderRadius: 10,
+              }}
+              onChange={(ev) => setAlias(ev.nativeEvent.text)}
+              value={alias}
+            />
+            <Button
+              disabled={!alias}
+              onPress={() => createIdentifier()}
+              title={'Create Identifier'}
+            />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
