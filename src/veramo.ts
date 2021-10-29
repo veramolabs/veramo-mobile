@@ -7,6 +7,8 @@ import {
   IKeyManager,
 } from '@veramo/core'
 
+import fs from 'fs'
+
 // Core identity manager plugin
 import { DIDManager } from '@veramo/did-manager'
 
@@ -43,11 +45,12 @@ import { PLATFORM } from './env'
 
 // You will need to get a project ID from infura https://www.infura.io
 const INFURA_PROJECT_ID = '5ffc47f65c4042ce847ef66a3fa70d4c'
+const databaseFile = 'veramo.sqlite'
 
 // Create react native db connection
 const dbConnection = createConnection({
   type: PLATFORM,
-  database: 'veramo.sqlite',
+  database: databaseFile,
   location: 'default',
   synchronize: true,
   logging: ['error', 'info', 'warn'],

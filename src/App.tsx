@@ -38,7 +38,7 @@ const App = () => {
       setIdentifiers(_ids)
 
       // Inspect the id object in your debug tool
-      console.log('_ids:', _ids)
+      // console.log('_ids:', _ids)
     }
 
     getIdentifiers()
@@ -46,7 +46,7 @@ const App = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView>
+      <ScrollView testID="scrollView">
         <View>
           <Text style={{ fontSize: 30, fontWeight: 'bold', padding: 20 }}>
             Identifiers
@@ -70,7 +70,10 @@ const App = () => {
                     borderBottomWidth: identifiers.length > index + 1 ? 1 : 0,
                   }}
                 >
-                  <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+                  <Text
+                    style={{ fontSize: 18, fontWeight: 'bold' }}
+                    testID={'item-identifier'}
+                  >
                     {id.alias}
                   </Text>
                   <Text>{id.did}</Text>
@@ -82,6 +85,7 @@ const App = () => {
           </View>
           <View style={{ padding: 15 }}>
             <TextInput
+              testID="input"
               placeholder="Add alias name (required)"
               style={{
                 marginBottom: 20,
@@ -89,9 +93,10 @@ const App = () => {
                 padding: 15,
                 borderRadius: 10,
               }}
-              onChange={(ev) => setAlias(ev.nativeEvent.text)}
+              onChangeText={(text) => setAlias(text)}
               value={alias}
             />
+            <Text>{alias}</Text>
             <Button
               disabled={!alias}
               onPress={() => createIdentifier()}
